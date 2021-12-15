@@ -3,16 +3,19 @@ import pyttsx3
 
 recognizer = speech_recognition.Recognizer()
 while True:
-    
-    with speech_recognition.Microphone() as mic:
-        recognizer.adjust_for_ambient_noise(mic, duration=0.2)
-        audio = recognizer.listen(mic)
+    try:
+        with speech_recognition.Microphone() as mic:
+            recognizer.adjust_for_ambient_noise(mic, duration=0.2)
+            audio = recognizer.listen(mic)
 
-        text = recognizer.recognize_google(audio)
-        text = text.lower()
-
-        print(f"Recognized: {text}")
-   
+            text = recognizer.recognize_google(audio)
+            text = text.lower()
+            if text == "hello":
+                print("Hey man")
+            print(f"Recognized: {text}")
+    except Exception as e:
+        if e:
+            print("Couldn't hear that")
         recognizer = speech_recognition.Recognizer()
-      
-       
+        continue
+    
