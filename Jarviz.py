@@ -10,7 +10,7 @@ import ssl
 import certifi
 import time
 import os
-from io import BytesIO
+import subprocess
 
 recognizer = speech_recognition.Recognizer()
 exit = True 
@@ -23,25 +23,45 @@ def speak(data):
     playsound(audio_file) # play the audio file
     os.remove(audio_file) # remove audio file
 
+def ask():
+    try:
+        recognizer.adjust_for_ambient_noise(mic, duration=0.2)
+        audio = recognizer.listen(mic)
+        text = recognizer.recognize_google(audio)
+        text = text.lower()
+        return text
+    except Exception:
+        return "error"
+
 speak("Welcome back King")
 
-while exit:
-    try:
-        with speech_recognition.Microphone() as mic:
-            recognizer.adjust_for_ambient_noise(mic, duration=0.2)
-            audio = recognizer.listen(mic)
+#Entering constant voice recognition until i say exit
+with speech_recognition.Microphone() as mic:
 
-            text = recognizer.recognize_google(audio)
-            text = text.lower()
-            if text == "hello":
-                speak("Hey man")
-            if text == "quit":
+    while exit:
+        text = ask()
+            
+        #wake up the butler 
+        if text == "butler":
+            speak("Hey king")
+            text = ask()
+
+            # here are all my commands
+            if text == "yo":
+                speak("What's gucci")
+            if text == "peace":
                 exit = False 
-                speak("Buh bye")
-            print(f"Recognized: {text}")
-    except Exception as e:
-        if e:
-            speak("Couldn't hear that")
-        recognizer = speech_recognition.Recognizer()
-        continue
-    
+                speak("peace and love")
+            if text == "search":
+                speak("what information do you seek")
+                search = ask()
+                url = 'https://www.google.com/search?q=' + search
+                webbrowser.get().open(url)
+                speak("Ta da")
+            if text == "time to work":
+                speak("you're the best developer in the world")
+                os.startfile('C:\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains\pycharm')
+        elif text == "error":
+            print("Still listening :)")
+        
+
