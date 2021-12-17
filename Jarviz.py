@@ -1,6 +1,5 @@
 import speech_recognition
 import pyttsx3
-import playsound # to play an audio file
 import gtts
 from playsound import playsound
 import random
@@ -11,6 +10,7 @@ import certifi
 import time
 import os
 import subprocess
+import winsound
 
 recognizer = speech_recognition.Recognizer()
 exit = True 
@@ -33,35 +33,50 @@ def ask():
     except Exception:
         return "error"
 
-speak("Welcome back King")
+### os manipulation references ###       
+#playsound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/ta_da")
+#os.system("start C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/ta_da.mp3")
+#winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/est_dev.wav", winsound.SND_ASYNC)
+
+#greetings
+winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/welcome.wav", winsound.SND_ASYNC)
+print("ok")
 
 #Entering constant voice recognition until i say exit
 with speech_recognition.Microphone() as mic:
 
     while exit:
         text = ask()
-            
+
         #wake up the butler 
         if text == "butler":
-            speak("Hey king")
+            winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/hey_king.wav", winsound.SND_ASYNC)
             text = ask()
 
             # here are all my commands
             if text == "yo":
-                speak("What's gucci")
-            if text == "peace":
+                winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/wats_gucci.wav", winsound.SND_ASYNC)
+
+            elif text == "peace":
                 exit = False 
-                speak("peace and love")
-            if text == "search":
-                speak("what information do you seek")
+
+            elif text == "search":
+                winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/wat_info.wav", winsound.SND_ASYNC)
                 search = ask()
                 url = 'https://www.google.com/search?q=' + search
                 webbrowser.get().open(url)
-                speak("Ta da")
-            if text == "time to work":
-                speak("you're the best developer in the world")
+                winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/ta_da.wav", winsound.SND_ASYNC)
+
+            elif text == "time to work":
+                winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/est_dev.wav", winsound.SND_ASYNC)
                 os.startfile('C:\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains\pycharm')
+
         elif text == "error":
             print("Still listening :)")
-        
+        elif text != "error":
+            print("This is what I heard: ",text)
+
+# exit sound
+winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/peace_and_love.wav", winsound.SND_ASYNC)
+delay = input("Press ENTER to close: ")
 
