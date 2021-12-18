@@ -70,6 +70,11 @@ with speech_recognition.Microphone() as mic:
             elif text == "time to work":
                 winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/est_dev.wav", winsound.SND_ASYNC)
                 os.startfile('C:\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains\pycharm')
+                os.startfile(r'C:/Users/Arthu/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Outlook')
+                os.startfile(r'C:/Users/Arthu/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Microsoft Teams')
+                os.startfile(r'C:/ProgramData/Microsoft/Windows/Start Menu/Programs/PremiumSoft/Navicat')
+                print("workspace executed")
+
 
         elif text == "error":
             print("Still listening :)")
