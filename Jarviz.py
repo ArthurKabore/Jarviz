@@ -14,6 +14,7 @@ import winsound
 
 recognizer = speech_recognition.Recognizer()
 exit = True 
+
 # get string and make a audio file to be played
 def speak(data):
     tts = gtts.gTTS(data, lang="en-us")
@@ -40,7 +41,6 @@ def ask():
 
 #greetings
 winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/welcome.wav", winsound.SND_ASYNC)
-print("ok")
 
 #Entering constant voice recognition until i say exit
 with speech_recognition.Microphone() as mic:
@@ -69,10 +69,13 @@ with speech_recognition.Microphone() as mic:
 
             elif text == "time to work":
                 winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/est_dev.wav", winsound.SND_ASYNC)
+                url = 'https://www.youtube.com/watch?v=oG7jKUHsLfY&list=PLsXJGdN3urCsmRJSMXrFyUCq_7pYOV2Z2&index=1' 
+                webbrowser.get().open(url)
                 os.startfile('C:\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains\pycharm')
                 os.startfile(r'C:/Users/Arthu/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Outlook')
                 os.startfile(r'C:/Users/Arthu/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Microsoft Teams')
                 os.startfile(r'C:/ProgramData/Microsoft/Windows/Start Menu/Programs/PremiumSoft/Navicat')
+                
                 print("workspace executed")
 
 
