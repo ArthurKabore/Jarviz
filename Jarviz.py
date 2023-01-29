@@ -13,7 +13,7 @@ import subprocess
 import winsound
 
 recognizer = speech_recognition.Recognizer()
-exit = True 
+done = False
 
 # get string and make a audio file to be played
 def speak(data):
@@ -22,8 +22,11 @@ def speak(data):
     audio_file = 'audio'+ str(r) + '.mp3'
     tts.save(audio_file) # save as mp3
     playsound(audio_file) # play the audio file
-    os.remove(audio_file) # remove audio file
-
+    while audio_file:
+        try:
+            os.remove(audio_file) # remove audio file
+        except:
+            pass
 def ask():
     try:
         recognizer.adjust_for_ambient_noise(mic, duration=0.2)
@@ -40,42 +43,40 @@ def ask():
 #winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/est_dev.wav", winsound.SND_ASYNC)
 
 #greetings
-winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/welcome.wav", winsound.SND_ASYNC)
+# winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/welcome.wav", winsound.SND_ASYNC)
 
 #Entering constant voice recognition until i say exit
 with speech_recognition.Microphone() as mic:
 
-    while exit:
+    while not done:
         text = ask()
+        text = text.lower()
 
         #wake up the butler 
         if text == "butler":
-            winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/hey_king.wav", winsound.SND_ASYNC)
+            speak("Your wish is my command")
             text = ask()
-
+            text = text.lower()
             # here are all my commands
             if text == "yo":
-                winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/wats_gucci.wav", winsound.SND_ASYNC)
+                speak("Heyo")
 
             elif text == "peace":
-                exit = False 
+                done = True 
 
             elif text == "search":
-                winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/wat_info.wav", winsound.SND_ASYNC)
+                speak("What are you looking for")
                 search = ask()
                 url = 'https://www.google.com/search?q=' + search
                 webbrowser.get().open(url)
-                winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/ta_da.wav", winsound.SND_ASYNC)
+                speak(f"Here are the results for {search}")
 
             elif text == "time to work":
-                winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/est_dev.wav", winsound.SND_ASYNC)
+                speak("Get it done")
                 url = 'https://www.youtube.com/watch?v=oG7jKUHsLfY&list=PLsXJGdN3urCsmRJSMXrFyUCq_7pYOV2Z2&index=1' 
                 webbrowser.get().open(url)
                 os.startfile('C:\ProgramData\Microsoft\Windows\Start Menu\Programs\JetBrains\pycharm')
-                os.startfile(r'C:/Users/Arthu/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Outlook')
-                os.startfile(r'C:/Users/Arthu/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Microsoft Teams')
-                os.startfile(r'C:/ProgramData/Microsoft/Windows/Start Menu/Programs/PremiumSoft/Navicat')
-                
+        
                 print("workspace executed")
 
 
@@ -85,6 +86,6 @@ with speech_recognition.Microphone() as mic:
             print("This is what I heard: ",text)
 
 # exit sound
-winsound.PlaySound("C:/Users/Arthu/Downloads/Etc/Code/Jarviz/sound/peace_and_love.wav", winsound.SND_ASYNC)
+speak("Until next time")
 delay = input("Press ENTER to close: ")
 
