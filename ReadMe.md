@@ -1,8 +1,7 @@
-Minimum Dependancies required:
+Minimum Dependancies required
 
-pip install 
-            speech_recognition
-            pyttsx3
+pip install: 
+            pyttsx3, 
+            speech_recognition, 
+            playsound,
             gtts
-            playsound
-            random
