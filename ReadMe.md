@@ -1,4 +1,4 @@
-Minimum Dependancies required:
+Minimum Dependencies required:
 
 pip install 
             speech_recognition
