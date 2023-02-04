@@ -3,6 +3,18 @@ from logging.config import listen
 import speech_recognition as sr
 import pyttsx3 
 import webbrowser
+import os
+import openai
+
+# Initiating ChatGPT API
+openai.api_key = "" # Use your own key. This can get expensive :) 
+
+# Test reqest
+openai.Edit.create(
+  model="text-davinci-edit-001",
+  input="What day is it?",
+  instruction="Fix the spelling mistakes"
+)
 
 # Speech engine initialisation
 engine = pyttsx3.init()
@@ -21,7 +33,7 @@ def speak(text, rate = 180):
 def parseCommand():
     listener = sr.Recognizer()
     print('Listening...')
- 
+    
     with sr.Microphone() as source:
         listener.pause_threshold = 1
         input_speech = listener.listen(source)
@@ -45,8 +57,8 @@ if __name__ == '__main__':
         speak('Waiting for orders')
         input = parseCommand()
 
-        #Activate command section
-        if input == "hello":
+        # Activate command section
+        if input == "help":
             speak('How can I help')
             input = parseCommand()
 
@@ -58,14 +70,21 @@ if __name__ == '__main__':
                 webbrowser.get().open(url)
  
             # Note taking
-            if input == 'log':
+            if input == 'note':
                 speak('Ready to record your note')
-                newNote = parseCommand().lower()
+                newNote = parseCommand().title()
                 now = datetime.now().strftime('%Y-%m-%d-%H-%M-%S')
                 with open('note_%s.txt' % now, 'w') as newFile:
                     newFile.write(newNote)
                 speak('Note written')
- 
+
+            # Open workspace
+            if input == "work":
+                os.startfile(r'C:\Users\Arthur\AppData\Local\Programs\Microsoft VS Code')
+                webbrowser.get().open("https://www.youtube.com/watch?v=588vxxSSMh0") 
+
+        # Exit
         if input == 'exit':
             speak('Goodbye')
             break
+
