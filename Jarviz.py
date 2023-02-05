@@ -9,12 +9,6 @@ import openai
 # Initiating ChatGPT API
 openai.api_key = "" # Use your own key. This can get expensive :) 
 
-# Test reqest
-openai.Edit.create(
-  model="text-davinci-edit-001",
-  input="What day is it?",
-  instruction="Fix the spelling mistakes"
-)
 
 # Speech engine initialisation
 engine = pyttsx3.init()
@@ -56,6 +50,7 @@ if __name__ == '__main__':
     while True:
         speak('Waiting for orders')
         input = parseCommand()
+        # TODO: Make input a list to reach possible keywords in command input
 
         # Activate command section
         if input == "help":
@@ -82,6 +77,14 @@ if __name__ == '__main__':
             if input == "work":
                 os.startfile(r'C:\Users\Arthur\AppData\Local\Programs\Microsoft VS Code')
                 webbrowser.get().open("https://www.youtube.com/watch?v=588vxxSSMh0") 
+
+            if input == "machine test":
+                # ChatGPT testing section
+                """ openai.Edit.create(
+                model="text-davinci-edit-001",
+                input="What day is it?",
+                instruction="Fix the spelling mistakes"
+                ) """
 
         # Exit
         if input == 'exit':
