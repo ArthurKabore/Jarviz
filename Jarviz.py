@@ -46,7 +46,7 @@ def parseCommand():
 
 if __name__ == '__main__':
     speak('Booting up')
- 
+    
     while True:
         speak('Waiting for orders')
         input = parseCommand()
@@ -76,7 +76,8 @@ if __name__ == '__main__':
             # Open workspace
             if input == "work":
                 os.startfile(r'C:\Users\Arthur\AppData\Local\Programs\Microsoft VS Code')
-                webbrowser.get().open("https://www.youtube.com/watch?v=588vxxSSMh0") 
+                webbrowser.get().open("https://www.youtube.com/watch?v=588vxxSSMh0")
+
 
             if input == "machine test":
                 # ChatGPT testing section
@@ -85,6 +86,8 @@ if __name__ == '__main__':
                 input="What day is it?",
                 instruction="Fix the spelling mistakes"
                 ) """
+            if input == "shut down":
+                os.system("shutdown /s /t 1") #To try soon
 
         # Exit
         if input == 'exit':
