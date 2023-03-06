@@ -89,6 +89,8 @@ if __name__ == '__main__':
             if input == "shut down":
                 os.system("shutdown /s /t 1") #To try soon
 
+            if input == "fun time":
+                os.startfile(r'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Steam')
         # Exit
         if input == 'exit':
             speak('Goodbye')
